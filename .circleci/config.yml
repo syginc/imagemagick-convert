@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Publish to releases
           command: |
-            VERSION=${CIRCLE_TAG:1}
+            VERSION=${CIRCLE_TAG}
 
             scripts/create-release.sh syginc imagemagick-convert ${VERSION} dist/amazon/* dist/ubuntu/*
 
