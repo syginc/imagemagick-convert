@@ -15,20 +15,13 @@ fi
 OWNER="$1" ; shift
 REPO="$1" ; shift
 VERSION="$1" ; shift
-API_JSON="
-{
-    \"tag_name\": \"${VERSION}\",
-    \"target_commitish\": \"master\",
-    \"draft\": false,
-    \"prerelease\": false
-}"
 
+echo "Get a release..."
 RELEASE_RESPONSE=$(
-    curl --fail -X POST https://api.github.com/repos/${OWNER}/${REPO}/releases \
+    curl --fail https://api.github.com/repos/${OWNER}/${REPO}/releases/tags/${VERSION} \
         -H "Accept: application/vnd.github.v3+json" \
         -H "Authorization: token ${GITHUB_TOKEN}" \
-        -H "Content-Type: application/json" \
-        -d "${API_JSON}")
+        -H "Content-Type: application/json")
 
 RELEASE_ID=`echo ${RELEASE_RESPONSE} | python -c 'import json,sys;print(json.load(sys.stdin)["id"])'`
 

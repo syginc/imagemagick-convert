@@ -59,7 +59,7 @@ jobs:
           command: |
             VERSION=${CIRCLE_TAG}
 
-            scripts/create-release.sh syginc imagemagick-convert ${VERSION} dist/amazon/* dist/ubuntu/*
+            scripts/publish.sh syginc imagemagick-convert ${VERSION} dist/amazon/* dist/ubuntu/*
 
 
 workflows:
