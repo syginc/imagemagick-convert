@@ -16,6 +16,7 @@ cd ImageMagick-$MAGICK_VERSION
 ./configure \
   --enable-shared=no \
   --enable-static=yes \
+  --enable-delegate-build \
   --with-quantum-depth=16 \
   --without-magick-plus-plus \
   --without-dps \
