@@ -12,15 +12,55 @@ jobs:
 
       - run: scripts/build.sh
 
-      - run: scripts/create-release.sh syginc imagemagick-convert $(cat release-version) convert-amazonlinux201703 dist/convert
+      - run: mkdir dist/amazon; mv dist/convert dist/amazon/convert-amazonlinux201703
 
       - store_artifacts:
-          path: dist/
+          path: dist/amazon
 
       - persist_to_workspace:
           root: .
           paths:
-            - dist
+            - scripts
+            - dist/amazon
+
+  build-ubuntu:
+    working_directory: ~/build
+    docker:
+      - image: ubuntu:16.04
+
+    steps:
+      - checkout
+
+      - run: apt-get -y update && apt-get -y install build-essential curl libjpeg8-dev libpng12-dev libltdl-dev
+
+      - run: scripts/build.sh
+
+      - run: mkdir dist/ubuntu; mv dist/convert dist/ubuntu/convert-ubuntu1604
+
+      - store_artifacts:
+          path: dist/ubuntu
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist/ubuntu
+
+  publish:
+    working_directory: ~/build
+    docker:
+      - image: syginc/lambda-builder:node8
+
+    steps:
+      - attach_workspace:
+          at: .
+
+      - run:
+          name: Publish to releases
+          command: |
+            VERSION=${CIRCLE_TAG:1}
+
+            scripts/create-release.sh syginc imagemagick-convert ${VERSION} dist/amazon/* dist/ubuntu/*
+
 
 workflows:
   version: 2
@@ -28,5 +68,24 @@ workflows:
     jobs:
       - build-amazon:
           filters:
+            branches:
+              only: master
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+
+      - build-ubuntu:
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+
+      - deploy:
+          requires:
+            - build-amazon
+            - build-ubuntu
+          filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
