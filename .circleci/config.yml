@@ -6,9 +6,13 @@ jobs:
       - image: syginc/lambda-builder:node8
 
     steps:
+      - checkout
+
+      - run: yum install -y libtool-ltdl-devel
+
       - run: scripts/build.sh
 
-      - run: scripts/create-release.sh syginc imagemagick-convert $(release-version) convert-amazonlinux201703 dist/convert
+      - run: scripts/create-release.sh syginc imagemagick-convert $(cat release-version) convert-amazonlinux201703 dist/convert
 
       - store_artifacts:
           path: dist/
@@ -22,7 +26,7 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build:
+      - build-amazon:
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
