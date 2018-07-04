@@ -31,7 +31,7 @@ jobs:
     steps:
       - checkout
 
-      - run: apt-get -y update && apt-get -y install build-essential curl libjpeg8-dev libpng12-dev libltdl-dev pkg-config
+      - run: apt-get -y update && apt-get -y install build-essential curl libjpeg8-dev libpng-dev libltdl-dev pkg-config
 
       - run: scripts/build.sh
 
