@@ -26,7 +26,7 @@ jobs:
   build-ubuntu:
     working_directory: ~/build
     docker:
-      - image: ubuntu:16.04
+      - image: ubuntu:18.04
 
     steps:
       - checkout
@@ -35,7 +35,7 @@ jobs:
 
       - run: scripts/build.sh
 
-      - run: mkdir dist/ubuntu; mv dist/convert dist/ubuntu/convert-ubuntu1604
+      - run: mkdir dist/ubuntu; mv dist/convert dist/ubuntu/convert-ubuntu1804
 
       - store_artifacts:
           path: dist/ubuntu
