@@ -31,7 +31,7 @@ jobs:
     steps:
       - checkout
 
-      - run: apt-get -y update && apt-get -y install build-essential curl libjpeg8-dev libpng-dev libltdl-dev pkg-config
+      - run: apt-get -y update && apt-get -y install build-essential curl libjpeg8-dev libpng-dev libltdl-dev pkg-config openssh-client git
 
       - run: scripts/build.sh
 
@@ -48,7 +48,7 @@ jobs:
   publish:
     working_directory: ~/build
     docker:
-      - image: syginc/lambda-builder:node8
+      - image: syginc/lambda-builder:node12
 
     steps:
       - attach_workspace:
