@@ -29,9 +29,9 @@ jobs:
       - image: ubuntu:18.04
 
     steps:
-      - checkout
-
       - run: apt-get -y update && apt-get -y install build-essential curl libjpeg8-dev libpng-dev libltdl-dev pkg-config openssh-client git
+
+      - checkout
 
       - run: scripts/build.sh
 
