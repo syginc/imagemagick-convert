@@ -3,7 +3,7 @@ jobs:
   build-amazon:
     working_directory: ~/build
     docker:
-      - image: syginc/lambda-builder:node8
+      - image: syginc/lambda-builder:node12
 
     steps:
       - checkout
@@ -12,7 +12,7 @@ jobs:
 
       - run: scripts/build.sh
 
-      - run: mkdir dist/amazon; mv dist/convert dist/amazon/convert-amazonlinux201703
+      - run: mkdir dist/amazon; mv dist/convert dist/amazon/convert-amazonlinux2
 
       - store_artifacts:
           path: dist/amazon
