@@ -2,14 +2,14 @@
 
 set -eo pipefail
 
-MAGICK_VERSION=6.9.10-4
+MAGICK_VERSION=6.9.10-75
 rm -rf build
 rm -rf dist
 
 mkdir -p build
 
 pushd build
-curl -s -O https://www.imagemagick.org/download/ImageMagick-$MAGICK_VERSION.tar.xz
+curl -s -O ftp://ftp.kddlabs.co.jp/graphics/ImageMagick/ImageMagick-$MAGICK_VERSION.tar.xz
 tar xf ImageMagick-$MAGICK_VERSION.tar.xz
 cd ImageMagick-$MAGICK_VERSION
 ./configure \
