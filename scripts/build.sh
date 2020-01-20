@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-MAGICK_VERSION=6.9.10-75
+MAGICK_VERSION=6.9.10-87
 rm -rf build
 rm -rf dist
 
