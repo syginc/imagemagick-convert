@@ -3,7 +3,7 @@ jobs:
   build-amazon:
     working_directory: ~/build
     docker:
-      - image: syginc/lambda-builder:node12
+      - image: ghcr.io/syginc/lambda-builder:node12
 
     steps:
       - checkout
@@ -48,7 +48,7 @@ jobs:
   publish:
     working_directory: ~/build
     docker:
-      - image: syginc/lambda-builder:node12
+      - image: ghcr.io/syginc/lambda-builder:node12
 
     steps:
       - attach_workspace:
