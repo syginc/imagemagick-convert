@@ -9,7 +9,7 @@ rm -rf dist
 mkdir -p build
 
 pushd build
-curl -s -O ftp://ftp.kddlabs.co.jp/graphics/ImageMagick/ImageMagick-$MAGICK_VERSION.tar.xz
+curl -s -O https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-$MAGICK_VERSION.tar.xz
 tar xf ImageMagick-$MAGICK_VERSION.tar.xz
 cd ImageMagick-$MAGICK_VERSION
 ./configure \
